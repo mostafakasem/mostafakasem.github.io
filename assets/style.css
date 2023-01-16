@@ -1,0 +1,148 @@
+@import url("https://fonts.googleapis.com/css?family=Amaranth|Major+Mono+Display");
+.animate, body:after, body:before {
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+          animation-duration: 1s;
+}
+
+.transtion, .intro .social-links a, .intro .avatar img {
+  transition: all 0.5s ease-in-out;
+}
+
+@-webkit-keyframes fade2 {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade2 {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.m-0 {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: "Amaranth", sans-serif;
+  min-height: 100vh;
+  background-position: center center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 0;
+  margin: 0;
+  flex-direction: column;
+  background-attachment: fixed;
+  background-color: #6c13b9;
+}
+body:after, body:before {
+  content: "";
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.8;
+  background-image: linear-gradient(to right, #0059EC 0%, #009AF7 100%);
+  -webkit-animation: fade2 10s infinite;
+          animation: fade2 10s infinite;
+}
+body:after {
+  -webkit-animation: fade2 10s infinite;
+          animation: fade2 10s infinite;
+  background-image: linear-gradient(to right, rgba(0, 53, 79, 0.92) 0%, rgba(0, 53, 79, 0.08) 100%);
+}
+
+.intro {
+  width: 400px;
+  max-width: 100%;
+  margin: 8rem auto 2rem;
+  text-align: center;
+  padding: 50px 0;
+  min-height: 300px;
+  border-radius: 60px;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.168627451);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  grid-gap: 1rem 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  height: 350px;
+}
+.intro .avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  margin-top: -150px;
+  overflow: hidden;
+  box-shadow: 2px 3px 11px 0px rgba(0, 0, 0, 0.4);
+}
+.intro .avatar img {
+  width: 100%;
+  height: 100%;
+  filter: grayscale(100) brightness(1.05);
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.intro .name {
+  font-size: 2.5rem;
+  letter-spacing: 1.5px;
+  color: yellow;
+}
+.intro .job {
+  font: 1.2rem/2 Helvetica, "Amaranth", sans-serif;
+  font-weight: 100;
+  opacity: 0.6;
+}
+.intro .social-links a {
+  display: inline-block;
+}
+.intro .social-links a:hover, .intro .social-links a:focus {
+  transform: translateY(-3px);
+}
+.intro .social-links a.wts {
+  display: none;
+}
+.intro .social-links a img, .intro .social-links a svg {
+  width: 30px;
+  height: 30px;
+  margin: 20px 20px 0;
+}
+.intro .social-links a img path, .intro .social-links a svg path {
+  fill: #fff;
+}
+
+@media screen and (min-width: 0) and (max-width: 767px) {
+  .intro .social-links a.wts {
+    display: inline-block;
+  }
+  .intro {
+    background: none;
+  }
+}/*# sourceMappingURL=style.css.map */
