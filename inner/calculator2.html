@@ -1,0 +1,194 @@
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114993326-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date()); 
+            gtag('config', 'UA-114993326-1');
+        </script>
+        <title>Task estimator</title>
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="Author" content="Mostafa kasem - www.gtech.company">
+        <!-- <link rel="shortcut icon" href="https://static.whatsapp.net/rsrc.php/v3/yP/r/rYZqPCBaG70.png"> -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://static.whatsapp.net/rsrc.php/v3/yP/r/rYZqPCBaG70.png">
+        <meta name="theme-color" content="#53cd6b">
+        <meta name="description" content="send direct whats message to someone not in your contacts ">
+        <meta name="keywords" content="whats direct, whats message, send direct message to whats, chat with contact not in your contacts">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            *{ box-sizing: border-box}
+            body{ font-family: 'Lato', sans-serif;background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); padding: 0; margin: 0;   background: #fff; min-height: 100vh; position: relative;}
+            .container { width: 100%; max-width: 400px; margin: 0 auto;   padding: 0 20px; line-height: 1;}            
+            p{ color: #8d8d8d; font-size: 30px; text-transform: capitalize;}
+            input{font-size: 20px; min-height: 50px; width: 100%; padding: 10px; color: #555; box-sizing: border-box; background: #fff; border: 1px solid #ddd; border-radius: 5px;  margin: 10px 0 20px} 
+            .btn{text-decoration: none;
+                margin: 20px 0;
+                display: block;
+                padding: 15px 20px;
+                color: #fff;
+                background: #607D8B;
+                text-align: center;
+                border-radius: 5px;
+                box-sizing: border-box;
+                font-size: 20px;
+                width: 100%;
+                background-image: linear-gradient(180deg, #2196F3 0%, #3F51B5 100%);
+                clear: both;
+            }
+            ::placeholder {  color: #ccc; opacity: 1;}
+            .calculation{
+                color: #d1d1d1;
+                font-size: 14px;
+                margin: 0 0 5px ;
+            }
+            .total{
+                color: #673abe;
+                font-size: 2rem;
+                font-weight: 600;
+            }
+            .result{
+                /* display: flex;
+                justify-content: space-between;
+                align-items: center; */
+            }
+            .final{
+                border: 3px dashed #e5e5e5;
+                padding: 10px;
+                border-radius: 10px;
+                background: #fff;
+                margin: 10px 0;
+            }
+            .icon svg{
+                width: 20px;
+                height: 20px;
+                margin: 0 0 0 5px ;
+            }
+            .icon{
+                color: #555;
+            }
+            .icon *{
+                fill: #555;
+            }
+            p{
+                margin: 0 ;
+            }
+            header{
+                background: #673AB7;
+                padding: 15px 0;
+                margin: 0 0 30px;
+            }
+            header h1{
+
+                padding: 0;
+                margin: 0;
+                font-size: 24px;
+                color: #fff;
+            }
+            .hint{
+                font-size: 1rem;
+                color: #673ab7;
+            }
+            .hint span{
+                font-weight: 700;
+                font-size: 1.2rem; 
+                padding: 0 1rem;
+            }
+            .contents{
+                display: flex;
+                gap: 1rem;
+                flex-direction: column;
+                margin: 0 0 1rem;
+            }
+        </style>
+ 
+    </head>
+    <body>
+        <header>
+            <div class="container"> 
+                <h1> Task Estimator </h1>
+            </div>
+        </header>
+        <div id="app" class="container">   
+            <div> 
+                <label>No. of hours</label>
+                <input type="number" id="number"  v-on:change="calculate" placeholder=""  v-model="noOfHours">
+                <label>Cost per hour</label>
+                <input type="number" id="number" placeholder=""  v-model="static" disabled>
+                <!-- <label>No. of pages</label>
+                <input type="number" id="number" placeholder=""  v-model="pages"> -->
+            </div>
+            <a href="javascript:;" class="btn"  v-on:click="calculate">   Calculate </a> 
+            <div v-show="showDiv" class="contents">
+                <div class="result">
+                    <label>Total Cost:  
+                        ~=  <span>{{ totalSar }} SAR</span>
+                    </label>
+                    <div class="final">
+                        <span class="total">  {{totalUsd}}   </span> <span class="icon"> $ </span>
+                    </div> 
+                </div> 
+                <div class="result"> 
+                    <label>Total + commission from seller 20%</label>
+                    <div class="final">
+                        <span class="total">  {{ this.totalWithSellerCom }}   </span> <span class="icon"> $ </span>
+                    </div>
+                    <p class="calculation">   ( {{ totalUsd }} * 20% ) + {{ totalUsd }}  </p>   
+                </div> 
+                <div class="result"> 
+                    <label>Total + commission from buyer 5%: (Total payment) </label>
+                    <div class="final">
+                        <span class="total">  {{ this.totalWithBuyerCom }}  </span> <span class="icon"> $ </span>
+                    </div> 
+                    <p class="calculation">    {{ this.totalUsd }}  + {{this.buyerCom}} + {{this.sellerCom}}    </p>  
+                </div> 
+                <p class="hint">You need to buy services equal to <span>{{ parseInt( ( sellerCom + totalUsd ) ,10) }}</span></p>
+                
+            </div>
+        </div>   
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+        <script> 
+            new Vue({
+            el: '#app',
+                data: {
+                    noOfHours: '',
+                    pages: '', 
+                    static: 188,  
+                    totalUsd: 0,   
+                    totalSar: 0,
+                    sellerCom: 0,
+                    totalWithSellerCom: 0,
+                    totalWithBuyerCom: 0,
+                    total: 0,
+                    showDiv: false,
+                },
+                computed:{
+                    // sum:{
+                    //     get(){
+                    //         return parseInt(this.noOfHours,10) * parseInt(this.static,10);
+                    //     }, 
+                    // },
+                }, 
+                methods: { 
+                    calculate: function () {  
+                        this.totalSar =  parseInt(this.noOfHours,10) * parseInt(this.static,10);
+                        this.totalUsd  = parseInt( (this.totalSar / 3.76) ,10);
+                        this.sellerCom = parseInt( ( (this.totalUsd * 20) / 100 ) ,10);
+                        this.totalWithSellerCom = parseInt( ( this.sellerCom + this.totalUsd ) ,10);
+                        this.buyerCom = parseInt( ( (this.totalWithSellerCom * 5) / 100 ) ,10);
+                        this.totalWithBuyerCom = parseInt( ( this.buyerCom + this.totalWithSellerCom ) ,10)
+                        // this.total = parseInt( ( this.sellerCom + this.buyerCom + this.totalUsd ) , 10);
+                        this.showDiv = true;
+                    },  
+                },
+            }); 
+        </script> 
+    </body>
+</html>
