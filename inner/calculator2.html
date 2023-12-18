@@ -120,9 +120,7 @@
                 <label>No. of hours</label>
                 <input type="number" id="number"  v-on:change="calculate" placeholder=""  v-model="noOfHours">
                 <label>Cost per hour</label>
-                <input type="number" id="number" placeholder=""  v-model="static" disabled>
-                <!-- <label>No. of pages</label>
-                <input type="number" id="number" placeholder=""  v-model="pages"> -->
+                <input type="number" id="number" placeholder=""  v-model="staticUSD" disabled readonly>
             </div>
             <a href="javascript:;" class="btn"  v-on:click="calculate">   Calculate </a> 
             <div v-show="showDiv" class="contents">
@@ -151,16 +149,15 @@
                 <p class="hint">You need to buy services equal to <span>{{ parseInt( ( sellerCom + totalUsd ) ,10) }}</span></p>
                 
             </div>
-        </div>   
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min.js"></script> -->
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
         <script> 
             new Vue({
             el: '#app',
                 data: {
                     noOfHours: '',
-                    pages: '', 
                     static: 188,  
+                    staticUSD: 50,  
                     totalUsd: 0,   
                     totalSar: 0,
                     sellerCom: 0,
@@ -169,24 +166,16 @@
                     total: 0,
                     showDiv: false,
                 },
-                computed:{
-                    // sum:{
-                    //     get(){
-                    //         return parseInt(this.noOfHours,10) * parseInt(this.static,10);
-                    //     }, 
-                    // },
-                }, 
                 methods: { 
                     calculate: function () {  
-                        this.totalSar =  parseInt(this.noOfHours,10) * parseInt(this.static,10);
-                        this.totalUsd  = parseInt( (this.totalSar / 3.76) ,10);
-                        this.sellerCom = parseInt( ( (this.totalUsd * 20) / 100 ) ,10);
-                        this.totalWithSellerCom = parseInt( ( this.sellerCom + this.totalUsd ) ,10);
-                        this.buyerCom = parseInt( ( (this.totalWithSellerCom * 5) / 100 ) ,10);
-                        this.totalWithBuyerCom = parseInt( ( this.buyerCom + this.totalWithSellerCom ) ,10)
-                        // this.total = parseInt( ( this.sellerCom + this.buyerCom + this.totalUsd ) , 10);
+                        this.totalSar =  parseInt(this.noOfHours,10) * this.static; 
+                        this.totalUsd  = parseInt(this.noOfHours,10) * this.staticUSD;
+                        this.sellerCom =  (this.totalUsd * 20) / 100  ;
+                        this.totalWithSellerCom = this.sellerCom + this.totalUsd;
+                        this.buyerCom = ( (this.totalWithSellerCom * 5) / 100 );
+                        this.totalWithBuyerCom = ( this.buyerCom + this.totalWithSellerCom ); 
                         this.showDiv = true;
-                    },  
+                    },
                 },
             }); 
         </script> 
