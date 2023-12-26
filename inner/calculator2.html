@@ -135,19 +135,18 @@
                 <div class="result"> 
                     <label>Total + commission from seller 20%</label>
                     <div class="final">
-                        <span class="total">  {{ this.totalWithSellerCom }}   </span> <span class="icon"> $ </span>
+                        <span class="total">  {{ parseInt(this.totalWithSellerCom) }}   </span> <span class="icon"> $ </span>
                     </div>
                     <p class="calculation">   ( {{ totalUsd }} * 20% ) + {{ totalUsd }}  </p>   
                 </div> 
                 <div class="result"> 
                     <label>Total + commission from buyer 5%: (Total payment) </label>
                     <div class="final">
-                        <span class="total">  {{ this.totalWithBuyerCom }}  </span> <span class="icon"> $ </span>
+                        <span class="total">  {{ parseInt(this.totalWithBuyerCom) }}  </span> <span class="icon"> $ </span>
                     </div> 
                     <p class="calculation">    {{ this.totalUsd }}  + {{this.buyerCom}} + {{this.sellerCom}}    </p>  
                 </div> 
-                <p class="hint">You need to buy services equal to <span>{{ parseInt( ( sellerCom + totalUsd ) ,10) }}</span></p>
-                
+                <p class="hint">You need to buy services equal to <span> {{ parseInt(this.totalWithSellerCom) }} $</span></p>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
@@ -170,8 +169,9 @@
                     calculate: function () {  
                         this.totalSar =  parseInt(this.noOfHours,10) * this.static; 
                         this.totalUsd  = parseInt(this.noOfHours,10) * this.staticUSD;
-                        this.sellerCom =  (this.totalUsd * 20) / 100  ;
-                        this.totalWithSellerCom = this.sellerCom + this.totalUsd;
+                        this.sellerCom =  (this.totalUsd * 26) / 100  ;
+                        this.totalWithSellerCom = 62.8 * this.noOfHours;
+                        // this.totalWithSellerCom = this.sellerCom + this.totalUsd;
                         this.buyerCom = ( (this.totalWithSellerCom * 5) / 100 );
                         this.totalWithBuyerCom = ( this.buyerCom + this.totalWithSellerCom ); 
                         this.showDiv = true;
