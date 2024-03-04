@@ -21,18 +21,13 @@ body.dark-mode {
   --bs-primary-rgb: 240, 84, 84 !important;
   --bs-body-color: #fafafa;
 }
-
-@media (prefers-color-scheme: dark) {
-  body .text-muted {
-    color: #fff !important;
-  }
-  .projects li img {
-    filter: brightness(100) grayscale(1) contrast(10);
-  }
-  .contact-list li svg * {
-    fill: #b1b1b1;
-  }
+body.dark-mode body .text-muted {
+  color: #fff !important;
 }
+body.dark-mode .projects li img {
+  filter: brightness(100) grayscale(1) contrast(10);
+}
+
 /*!
  * Bootstrap  v5.2.0 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
@@ -7314,8 +7309,8 @@ body:before {
 .skills {
   display: grid;
   list-style: none;
-  grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
-  gap: 2rem 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  gap: 2rem 3rem;
 }
 
 .projects {
@@ -7418,5 +7413,9 @@ body:before {
   }
   .projects {
     grid-template-columns: 1fr 1fr;
+  }
+  .dark-toggle {
+    right: calc(50% - 20px) !important;
+    top: 0 !important;
   }
 }/*# sourceMappingURL=style.css.map */

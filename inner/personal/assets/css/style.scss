@@ -8,6 +8,7 @@ body{
     --bs-primary-rgb: 45, 38, 75 !important;
     --bd-violet-rgb: 112.520718,44.062154,249.437846;
 } ;
+
 body.dark-mode{ 
     --prime: #ccc;
     --second: #ff5cf4;
@@ -20,38 +21,16 @@ body.dark-mode{
     // --bs-primary-rgb:  255, 255, 255 !important;
     --bs-primary-rgb:  240, 84, 84 !important;
     --bs-body-color: #fafafa;
-}
-@media (prefers-color-scheme: dark) {
-    // :root{ 
-    //     --prime: #ccc;
-    //     --second: #ff5cf4;
-    //     --neutral: #F05454; 
-    //     // --bgcolor: #2D264B;
-    //     --bgcolor: #222831;
-    //     --white: #e5e5e50f;
-    //     --bs-dark-rgb: 255, 255, 255  !important;
-    //     // --bs-primary-rgb:  255, 255, 255 !important;
-    //     --bs-primary-rgb:  240, 84, 84 !important;
-    // }
-  
     body .text-muted{
       color: #fff !important;
     }
     .projects li img {
       filter: brightness(100) grayscale(1) contrast(10);
     }
-    // #about p{
-    //   color: #999;
-    // }
-    .contact-list li svg *{
-      fill: #b1b1b1
-    }
-    // img{
-    //     filter: grayscale(100%);
-    // }
-    // .projects li{
-    //     background: #ffffff1a;
-    // }
+}
+@media (prefers-color-scheme: dark) {
+
+
 }
   
 // Bootstrap v5.0.2
@@ -162,8 +141,8 @@ body {
 .skills{
     display: grid;
     list-style: none; 
-    grid-template-columns: repeat(auto-fit, minmax(65px, 1fr));
-    gap: 2rem 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+    gap: 2rem 3rem;
 }
 .projects{
     display: grid;
@@ -272,6 +251,10 @@ body {
  }
  .projects{
   grid-template-columns: 1fr 1fr;
+ }
+ .dark-toggle{
+  right: calc(50% - 20px) !important;
+  top: 0 !important;
  }
 }
 // .dark-mode{
